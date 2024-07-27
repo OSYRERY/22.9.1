@@ -1,0 +1,52 @@
+def binary_search(arr, target):
+    """Функция двоичного поиска"""
+    left = 0
+    right = len(arr) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+
+    return left
+
+
+def sort_list(lst):
+    """Функция сортировки списка"""
+    return sorted(lst)
+
+
+def main():
+    # Ввод последовательности чисел
+    numbers = input("Введите последовательность чисел через пробел: ").split()
+
+    # Проверка соответствия формату ввода
+    if not all(num.isdigit() for num in numbers):
+        print("Ошибка: введены некорректные данные.")
+        return
+
+    # Преобразование введённой последовательности в список
+    numbers_list = [int(num) for num in numbers]
+
+    # Сортировка списка
+    sorted_list = sort_list(numbers_list)
+
+    # Ввод числа
+    target = int(input("Введите число: "))
+
+    # Поиск позиции элемента
+    position = binary_search(sorted_list, target)
+
+    # Вывод результата
+    if position == len(sorted_list) or sorted_list[position] >= target:
+        print(f"Число {target} находится между элементами {sorted_list[position - 1]} и {sorted_list[position]}")
+    else:
+        print(f"Число {target} больше всех элементов в списке.")
+
+
+if __name__ == "__main__":
+    main()
